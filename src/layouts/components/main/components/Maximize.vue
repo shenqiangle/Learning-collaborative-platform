@@ -22,11 +22,11 @@ const exitMaximize = () => {
   width: 55px;
   height: 55px;
   cursor: pointer;
-  background-color: var(--el-color-info);
+  background-color: #909399;
   border-radius: 50%;
   opacity: 0.9;
   &:hover {
-    background-color: var(--el-color-info-dark-2);
+    background-color: #73767a;
   }
   .iconfont {
     position: relative;

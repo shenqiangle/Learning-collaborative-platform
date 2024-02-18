@@ -17,6 +17,7 @@ export function toast(message: string, type: 'success' | 'warning' | 'info' | 'e
     })
 }
 
+
 //消息提示框
 export function showModal(content: string, type: 'success' | 'warning' | 'info' | 'error', title?: string){
     return ElMessageBox.confirm(

@@ -40,9 +40,13 @@ export const useUserStore = defineStore({
         phone: null,
         requestTeams: null,
         university: null,
-        userName: ""
+        userName: "",
+        addedTeams: null,
+        planList: null,
+        taskList: null
       });
     }
+    
     
   },
 

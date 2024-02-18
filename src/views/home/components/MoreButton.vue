@@ -1,0 +1,109 @@
+<template>
+  <el-dropdown trigger="click" :teleported="false">
+    <div class="more-button">
+      <el-icon><More /></el-icon>
+    </div>
+    <template #dropdown>
+      <el-dropdown-menu>
+        <el-dropdown-item @click="handleRequestTeam">
+          <el-icon><UserFilled /></el-icon>申请进入队伍
+        </el-dropdown-item>
+        <el-dropdown-item @click="handleCheckTeamInfo">
+          <el-icon><UserFilled /></el-icon>查看队伍人员信息
+        </el-dropdown-item>
+        <el-dropdown-item @click="handleShowing">
+          <el-icon><Delete /></el-icon>不再展示
+        </el-dropdown-item>
+      </el-dropdown-menu>
+    </template>
+  </el-dropdown>
+  
+  <el-dialog v-model="dialogTableVisible" :title="teamInfo?.teamName" width="800">
+    <el-table :data="tableData" :border="true" style="width: 100%">
+    <el-table-column type="expand">
+      <template #default="props">
+        <div m="4">
+          <div class="expand-info">
+            <div>
+              <p m="t-0 b-2">major: {{ props.row.major }}</p>
+              <p m="t-0 b-2">gender: {{ props.row.gender }}</p>
+              <p m="t-0 b-2">email: {{ props.row.email }}</p>
+              <p m="t-0 b-2">phone: {{ props.row.phone }}</p>
+              <p m="t-0 b-2">personalDescription: {{ props.row.personalDescription }}</p>
+            </div>
+            <img :src="props.row.avatar" alt="memberAvatar">
+          </div>
+        </div>
+      </template>
+    </el-table-column>
+    <el-table-column label="大学" prop="university" />
+    <el-table-column label="昵称" prop="nickName" />
+  </el-table>
+  </el-dialog>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+import type { TeamShow, UserShow } from '@/types/team'
+import { requestTeam } from '@/api/modules/home'
+import { useUserStore } from '@/stores/modules/user';
+import { showMessage } from '@/composables/util'
+import { ElMessage } from 'element-plus';
+
+const UserStore = useUserStore();
+const emit = defineEmits(['removeTeam']);
+const props = defineProps({
+  teamInfo: {
+    type: Object as () => TeamShow
+  }
+});
+
+const dialogTableVisible = ref(false);
+
+function handleRequestTeam(){
+  if(UserStore.userInfo.addedTeams){
+    UserStore.userInfo.addedTeams.forEach((i)=>{
+      if(i.id == props.teamInfo?.id){
+        showMessage('您已进入队伍','warning');
+        return;
+      }
+    })
+  }
+  else if(UserStore.userInfo.leadTeams){
+    UserStore.userInfo.leadTeams.forEach((i)=>{
+      if(i.id == props.teamInfo?.id){
+        showMessage('您已进入队伍','warning');
+        return;
+      }
+    })
+  }
+  else{
+    // eslint-disable-next-line
+    const id = UserStore.userInfo.userName;
+    requestTeam(id).then(()=>{
+      showMessage("申请成功",'success');
+    }).catch(()=>{
+      ElMessage.error("申请失败，请检查网络或刷新后重试")
+    })
+  }
+    
+}
+
+const tableData = ref<UserShow[]>([]);
+function handleCheckTeamInfo() {
+  dialogTableVisible.value = true;
+  props.teamInfo?.members.forEach((i: UserShow)=>{
+    tableData.value.push(i);
+  })
+}
+
+function handleShowing(){
+  emit('removeTeam',props.teamInfo?.id);
+}
+
+
+</script>
+
+<style scoped lang="scss">
+@import "../index.scss";
+</style>
