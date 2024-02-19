@@ -31,7 +31,7 @@
       "children": [
         {
           "path": "/learningGroup/myGroup",
-          "name": "myGroup",
+          "name": "myGroup", 
           "component": "/learningGroup/myGroup/index",
           "meta": {
             "icon": "Menu",

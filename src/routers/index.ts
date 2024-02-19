@@ -71,7 +71,6 @@ router.beforeEach( async(to, from, next)=>{
   //如果用户登录，自动获取用户信息，并存储在userStore当中
   if(token && !hasGetUserInfo){
     hasGetUserInfo = true;
-    console.log("getInfo");
     await userStore.getUserInfo()
   }
 

@@ -1,19 +1,19 @@
-import { useCookies } from '@vueuse/integrations/useCookies';
 
-const tokenKey = "token";
+import { useUserStore } from '@/stores/modules/user';
 
-const cookie = useCookies();
 
 //获取token
 export function getToken(){
-    return cookie.get(tokenKey);
+    const UserStore = useUserStore();
+    return UserStore.userInfo.token;
 }
 // 设置token
-export function setToken(token:string){
-    return cookie.set(tokenKey,token);
+export function setToken(token:string){ 
+    const UserStore = useUserStore();
+    UserStore.userInfo.token = token
 }
 // 清除token
 export function removeToken(){
-    console.log("removetoken")
-    return cookie.remove(tokenKey);
+    const UserStore = useUserStore();
+    UserStore.userInfo.token = null;
 }

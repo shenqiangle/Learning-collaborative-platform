@@ -4,6 +4,7 @@
  * UserInfo
  */
 export interface UserInfo {
+    token: string | null;
     addedTeams: TeamShow[] | null;
     avatar: null | string;
     email: null | string;

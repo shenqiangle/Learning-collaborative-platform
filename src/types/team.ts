@@ -7,7 +7,7 @@ export interface TeamShow {
     leader: UserShow;
     memberAddable: boolean;
     members: UserShow[];
-    TaskList: TaskList[] | null;
+    taskList?: TaskList[] | null;
     teamAvatar: null | string;
     teamName: string;
     teamResource: Resource[] | null;
@@ -15,15 +15,6 @@ export interface TeamShow {
     [property: string]: any;
 }
 
-export interface TaskList {
-    completeDay: null | string;
-    id: string;
-    isCompleted: boolean;
-    performers: UserShow[] | null;
-    taskName: string;
-    teamName: string;
-    [property: string]: any;
-}
 
 /**
  * userShow
@@ -38,6 +29,16 @@ export interface UserShow {
     phone: null | string;
     university: null | string;
     userName: string;
+    [property: string]: any;
+}
+
+export interface TaskList {
+    completeDay: null | string;
+    id: string;
+    isCompleted: boolean;
+    performers: UserShow[] | null;
+    taskName: string;
+    teamName: string;
     [property: string]: any;
 }
 
@@ -59,3 +60,26 @@ export interface Resource {
     userName: string;
     [property: string]: any;
 }
+
+
+/**
+ * teamInfo
+ */
+export interface TeamInfo {
+    description: null | string;
+    id: string;
+    leader: UserShow;
+    memberAddable: boolean;
+    members: UserShow[];
+    requests: null | UserShow;
+    taskList?: TaskList[] | null;
+    teamAvatar: string;
+    teamName: string;
+    teamResource: Resource[] | null;
+    theme: string;
+    [property: string]: any;
+}
+
+
+
+

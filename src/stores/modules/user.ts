@@ -5,6 +5,7 @@ import { getUserInfo } from "@/api/modules/login";
 import { removeToken } from "@/composables/auth"
 import piniaPersistConfig from "@/stores/helper/persist";
 
+
 export const useUserStore = defineStore({
 
   id: "userStore",
@@ -12,7 +13,6 @@ export const useUserStore = defineStore({
   state: (): { userInfo: UserInfo } => ({
 
     userInfo: {} as UserInfo,
-
   }),
 
   actions:{
@@ -28,23 +28,7 @@ export const useUserStore = defineStore({
 
     logout(){
       removeToken();
-      this.setUserInfo({
-        avatar: null,
-        email: null,
-        gender: null,
-        leadTeams: null,
-        major: null,
-        nickName: "",
-        passWord: "",
-        personalDescription: null,
-        phone: null,
-        requestTeams: null,
-        university: null,
-        userName: "",
-        addedTeams: null,
-        planList: null,
-        taskList: null
-      });
+      this.userInfo = {} as UserInfo;
     }
     
     

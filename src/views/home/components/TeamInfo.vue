@@ -23,8 +23,6 @@ function removeIndexTeam(id: String){
     emits('removeTeam',id);
 }
 
-console.log(props.team);
-
 
 </script>
 

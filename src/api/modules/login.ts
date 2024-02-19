@@ -8,12 +8,6 @@ import authMenuList from '@/assets/json/authMenuList.json'
  */
 // 用户登录
 export function loginApi(username:string,password:string){
-  if(username == 'error'){
-    return service.post("/authsdad/login",{
-      username,
-      password
-    })
-  }
   return service.post("/auth/login",{
     username,
     password

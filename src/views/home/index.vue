@@ -9,7 +9,7 @@
       </el-col>
     </el-row>  
     <el-row justify="center" v-if="IndexTeamList.length" >
-      <TeamInfo v-for="(team,index) in IndexTeamList" :key="index" :team="team" @removeTeam="removeIndexTeam"/>
+      <TeamInfo v-for="team in IndexTeamList" :key="team.id" :team="team" @removeTeam="removeIndexTeam"/>
     </el-row>
   </div>
     
