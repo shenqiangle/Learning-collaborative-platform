@@ -1,10 +1,7 @@
-
-
 /**
- * UserInfo
+ * user
  */
 export interface UserInfo {
-    token: string | null;
     addedTeams: TeamShow[] | null;
     avatar: null | string;
     email: null | string;
@@ -20,7 +17,8 @@ export interface UserInfo {
     phone: null | string;
     planList: Plan[] | null;
     requestTeams: TeamShow[] | null;
-    taskList: TaskList[] | null;
+    taskList: TentacledTaskList[] | null;
+    token: string;
     university: null | string;
     /**
      * 账户名
@@ -38,21 +36,11 @@ export interface TeamShow {
     leader: UserShow;
     memberAddable: boolean;
     members: UserShow[];
-    TaskList: PurpleTaskList[] | null;
+    taskList: PurpleTaskList[] | null;
     teamAvatar: null | string;
     teamName: string;
     teamResource: Resource[] | null;
     theme: string;
-    [property: string]: any;
-}
-
-export interface PurpleTaskList {
-    completeDay: null | string;
-    id: string;
-    isCompleted: boolean;
-    performers: UserShow[] | null;
-    taskName: string;
-    teamName: string;
     [property: string]: any;
 }
 
@@ -69,6 +57,17 @@ export interface UserShow {
     phone: null | string;
     university: null | string;
     userName: string;
+    [property: string]: any;
+}
+
+export interface PurpleTaskList {
+    completeDay: null | string;
+    id: string;
+    isCompleted: boolean;
+    performers: UserShow[] | null;
+    taskDescription: string;
+    taskName: string;
+    teamName: string;
     [property: string]: any;
 }
 
@@ -101,8 +100,8 @@ export interface TeamInfo {
     memberAddable: boolean;
     members: UserShow[];
     requests: null | UserShow;
-    TaskList: FluffyTaskList[] | null;
-    teamAvatar: string;
+    taskList: FluffyTaskList[] | null;
+    teamAvatar: null | string;
     teamName: string;
     teamResource: Resource[] | null;
     theme: string;
@@ -114,6 +113,7 @@ export interface FluffyTaskList {
     id: string;
     isCompleted: boolean;
     performers: UserShow[] | null;
+    taskDescription: string;
     taskName: string;
     teamName: string;
     [property: string]: any;
@@ -131,22 +131,14 @@ export interface Plan {
     [property: string]: any;
 }
 
-export interface TaskList {
+export interface TentacledTaskList {
     completeDay: null | string;
     id: string;
     isCompleted: boolean;
     isImportant: boolean;
     performers: UserShow[] | null;
+    taskDescription: string;
     taskName: string;
     teamName: string;
-    [property: string]: any;
-}
-/**
- * 修改密码
- */
-export interface changePasswordForm {
-    oldPassword: string;
-    newPassword: string;
-    confirmNewPassword: string;
     [property: string]: any;
 }

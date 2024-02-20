@@ -1,7 +1,87 @@
-.content-box {
-  align-items: flex-start;
-  span {
-    width: 100%;
-    text-align: center;
-  }
+.card {
+  margin-top: 10px;
 }
+.header {
+  margin-bottom: 5px;
+}
+.card:hover {
+  background-color: #eee;
+}
+.active {
+  background-color: skyblue;
+}
+.completed {
+  text-decoration: line-through;
+}
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  height: 24px;
+  width: 24px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+
+
+.container input ~ .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.taskInfo {
+  margin-left: 10px;
+}
+.el-collapse-item-title {
+  font-size: 16px;
+  padding:  0 20px;
+}
+.el-collapse-item {
+  margin-bottom: 5px;
+}
+:deep(.el-collapse-item__header) {
+  height: 62.4px;
+  border: 1px solid #e4e7ed;
+  border-radius: 6px;
+}
+
+
+

@@ -6,6 +6,7 @@ export interface Task {
     id: string;
     isCompleted: boolean;
     performers: UserShow[] | null;
+    taskDescription: string;
     taskName: string;
     teamName: string;
     [property: string]: any;

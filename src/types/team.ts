@@ -1,20 +1,20 @@
 /**
- * teamShow
+ * teamInfo
  */
-export interface TeamShow {
+export interface TeamInfo {
     description: null | string;
     id: string;
     leader: UserShow;
     memberAddable: boolean;
     members: UserShow[];
-    taskList?: TaskList[] | null;
+    requests: null | UserShow;
+    taskList: TaskList[] | null;
     teamAvatar: null | string;
     teamName: string;
     teamResource: Resource[] | null;
     theme: string;
     [property: string]: any;
 }
-
 
 /**
  * userShow
@@ -37,6 +37,7 @@ export interface TaskList {
     id: string;
     isCompleted: boolean;
     performers: UserShow[] | null;
+    taskDescription: string;
     taskName: string;
     teamName: string;
     [property: string]: any;
@@ -61,25 +62,19 @@ export interface Resource {
     [property: string]: any;
 }
 
-
 /**
- * teamInfo
+ * teamShow
  */
-export interface TeamInfo {
+export interface TeamShow {
     description: null | string;
     id: string;
     leader: UserShow;
     memberAddable: boolean;
     members: UserShow[];
-    requests: null | UserShow;
-    taskList?: TaskList[] | null;
-    teamAvatar: string;
+    taskList: TaskList[] | null;
+    teamAvatar: null | string;
     teamName: string;
     teamResource: Resource[] | null;
     theme: string;
     [property: string]: any;
 }
-
-
-
-
