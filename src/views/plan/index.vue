@@ -1,8 +1,16 @@
 <template>
-    <div>
-        计划与提醒
+    <div class="card">
+      plan
     </div>
-</template>
-
-<script setup lang="ts" name="plan">
-</script>
+  </template>
+  
+  <script setup lang="ts" name="Plan">
+  
+  
+  
+  </script>
+  
+  <style lang="scss" scoped>
+  @import './index.scss';
+  </style>
+  
