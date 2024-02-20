@@ -59,7 +59,6 @@ const audio = new Audio(audioFile.default);
 watch(
   () => UserStore.userInfo.taskList as Task[],
   (newTaskList: Task[]) => {
-    console.log(newTaskList) // 打印出新的列表值
     if (newTaskList) {
       completedList.value = []
       unCompletedList.value = []

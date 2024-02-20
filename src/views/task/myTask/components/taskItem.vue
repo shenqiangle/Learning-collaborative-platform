@@ -18,8 +18,16 @@ const emit = defineEmits(['updateCheckbox'])
 
 const taskNameRef = ref()
 
-function onCheckboxChange(event:event) {
+/* function onCheckboxChange(event: Event) {
+  if((event.target as HTMLInputElement)?.checked){
+    emit('updateCheckbox',props.taskInfo.id,(event.target as HTMLInputElement)?.checked)
+  }   
+} */
+function onCheckboxChange(event: Event) {
+  if(event.target && 'checked' in event.target){
     emit('updateCheckbox',props.taskInfo.id,event.target.checked)
+  }
+    
 }
 
 
