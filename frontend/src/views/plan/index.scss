@@ -1,0 +1,127 @@
+.card {
+  margin-top: 10px;
+}
+
+.taskDate {
+  font-size: 10px;
+  position: relative;
+  top: -2px;
+  margin-left: 10px;
+  margin-bottom: 13px;
+  font-size: 12px;
+}
+.container-right {
+  position: absolute;
+  top:40%;
+  right: 5%;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+.el-collapse-item-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.important {
+  color: green;
+}
+.not-important {
+  color: #a5a4a4;
+}
+.importanceButton.color-theme {
+  animation: fillAnimation 100ms;
+}
+@keyframes fillAnimation {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+}
+
+  100% {
+    transform: scale(1);
+}
+}
+
+
+:deep(.el-textarea) {
+  max-width: 80%;
+}
+
+:deep(.el-textarea) {
+  padding-top: 5px;
+  --el-input-border-color: green;
+  --el-input-focus-border-color: green;
+}
+
+.el-collapse {
+  margin-top: 25px;
+}
+.el-collapse-item {
+  margin: 5px;
+}
+
+:deep(.el-date-editor.el-input, .el-date-editor.el-input__wrapper){
+  margin-left: auto;
+  width: 125px;
+}
+
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  height: 24px;
+  width: 24px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+
+
+.container input ~ .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+
+
