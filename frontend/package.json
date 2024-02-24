@@ -21,6 +21,8 @@
     "@vueuse/integrations": "^10.7.2",
     "animate.css": "^4.1.1",
     "axios": "^1.6.7",
+    "echarts": "^5.5.0",
+    "echarts-liquidfill": "^3.1.0",
     "element-plus": "^2.5.5",
     "md5": "^2.3.0",
     "nanoid": "^5.0.6",

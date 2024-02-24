@@ -102,7 +102,7 @@ export interface TeamInfo {
     memberAddable: boolean;
     members: UserShow[];
     requests: null | UserShow;
-    taskList: FluffyTaskList[] | null;
+    taskList: TaskList[] | null;
     teamAvatar: null | string;
     teamName: string;
     teamResource: Resource[] | null;
@@ -110,7 +110,7 @@ export interface TeamInfo {
     [property: string]: any;
 }
 
-export interface FluffyTaskList {
+export interface TaskList {
     completeDay: null | string;
     id: string;
     isCompleted: boolean;

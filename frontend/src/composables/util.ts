@@ -4,6 +4,7 @@ import {
     ElMessage,
      } 
 from "element-plus";
+import { da } from "element-plus/es/locale/index.mjs";
 
 
 
@@ -66,3 +67,15 @@ export function getUrlWithParams() {
     };
     return url['history'];
   }
+
+
+export function getDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1; // 注意月份从 0 开始，所以要加 1
+    const day = today.getDate();
+
+    
+    return {year,month,day};
+}
+

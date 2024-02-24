@@ -80,4 +80,3 @@ export interface TeamShow {
     [property: string]: any;
 }
 
-
