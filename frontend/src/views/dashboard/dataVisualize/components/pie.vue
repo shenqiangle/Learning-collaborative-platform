@@ -5,18 +5,29 @@
 </template>
 
 <script setup lang="ts" name="pie">
-import { ECOption } from "@/components/ECharts/config";
+import type { ECOption } from "@/components/ECharts/config";
 import ECharts from "@/components/ECharts/index.vue";
 
+const props = defineProps({
+  taskCompletedNumber:{
+    type: Number,
+    default:0
+  },
+  taskUnCompletedNumber:{
+    type:Number,
+    default:0
+  }
+
+})
 const pieData = [
-  { value: 5000, name: "Gitee 访问量" },
-  { value: 5000, name: "GitHub 访问量" }
+  { value: props.taskCompletedNumber , name: "已完成 任务量" },
+  { value: props.taskUnCompletedNumber, name: "未完成 任务量" }
 ];
 
 const option: ECOption = {
   title: {
-    text: "Gitee / GitHub",
-    subtext: "访问占比",
+    text: "已完成 / 未完成",
+    subtext: "任务占比",
     left: "56%",
     top: "45%",
     textAlign: "center",

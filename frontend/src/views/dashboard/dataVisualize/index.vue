@@ -13,7 +13,7 @@
               <div class="img-box">
                 <img src="./images/book-sum.png" alt="" />
               </div>
-              <span class="left-number">{{ taskNumber }}</span>
+              <span class="left-number"><CountTo :value="taskNumber"/></span>
             </div>
           </el-col>
           <el-col class="mb40" :xs="24" :sm="12" :md="12" :lg="8" :xl="8">
@@ -22,37 +22,37 @@
                 <div class="traffic-img">
                   <img src="./images/add_person.png" alt="" />
                 </div>
-                <span class="item-value">{{ taskCompletedNumber }}</span>
+                <span class="item-value"><CountTo :value="taskCompletedNumber"/></span>
                 <span class="traffic-name sle">已完成数量</span>
               </div>
               <div class="gitHub-traffic traffic-box">
                 <div class="traffic-img">
                   <img src="./images/add_team.png" alt="" />
                 </div>
-                <span class="item-value">{{ taskUnCompletedNumber }}</span>
+                <span class="item-value"><CountTo :value="taskUnCompletedNumber"/></span>
                 <span class="traffic-name sle">未完成数量</span>
               </div>
               <div class="today-traffic traffic-box">
                 <div class="traffic-img">
                   <img src="./images/today.png" alt="" />
                 </div>
-                <span class="item-value">{{ taskTodayNumber }}</span>
+                <span class="item-value"><CountTo :value="taskTodayNumber"/></span>
                 <span class="traffic-name sle">今日完成</span>
               </div>
               <div class="yesterday-traffic traffic-box">
                 <div class="traffic-img">
                   <img src="./images/book_sum.png" alt="" />
                 </div>
-                <span class="item-value">{{ taskYesterdayNumber }}</span>
+                <span class="item-value"><CountTo :value="taskYesterdayNumber"/></span>
                 <span class="traffic-name sle">昨日完成</span>
               </div>
             </div>
           </el-col>
           <el-col class="mb40" :xs="24" :sm="24" :md="24" :lg="10" :xl="10">
             <div class="item-right">
-              <div class="echarts-title">Gitee / GitHub 访问量占比</div>
+              <div class="echarts-title">已完成 / 未完成 任务占比</div>
               <div class="book-echarts">
-                <Pie ref="pieRef" />
+                <Pie ref="pieRef" :taskCompletedNumber="taskCompletedNumber" :taskUnCompletedNumber="taskUnCompletedNumber"/>
               </div>
             </div>
           </el-col>
@@ -78,8 +78,8 @@ import { ref, computed } from "vue";
 import Pie from "./components/pie.vue";
 import { useUserStore } from "@/stores/modules/user";
 import { getDate } from '@/composables/util'
-import Curve from "./components/curve.vue";
-import { use } from "echarts/core";
+import CountTo from '@/components/CountTo/index.vue'
+
 
 const date = getDate()
 const UserStore = useUserStore();
@@ -115,7 +115,6 @@ function countTasks(condition: (task: any) => boolean) {
   });
   return totalNumber;
 }
-
 
 const tabActive = ref(1);
 
