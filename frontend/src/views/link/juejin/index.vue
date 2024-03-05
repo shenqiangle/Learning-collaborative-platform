@@ -1,14 +1,15 @@
 <template>
   <div class="card content-box">
     <span class="text">
-      掘金文档：
-      <a href="https://juejin.cn/user/3263814531551816/posts" target="_blank">https://juejin.cn/user/3263814531551816/posts</a>
+      HEXO文档：
+      <a :href=HEXO_URL target="_blank">{{ HEXO_URL }}</a>
       🍒🍉🍊
     </span>
   </div>
 </template>
 
-<script setup lang="ts" name="juejin"></script>
+<script setup lang="ts" name="hexo">
+import { HEXO_URL } from '@/config';</script>
 
 <style scoped lang="scss">
 @import "./index.scss";

@@ -1,41 +1,6 @@
-<!-- eslint-disable vue/valid-template-root -->
+
 <!-- 经典布局 -->
 <template>
-  <!-- <el-container class="layout">
-    <el-header>
-      <div class="header-lf mask-image">
-        <div class="logo flx-center">
-          <img class="logo-img" src="@/assets/images/logo.svg" alt="logo" />
-          <span class="logo-text">{{ title }}</span>
-        </div>
-        <ToolBarLeft />
-      </div>
-      <div class="header-ri">
-        <ToolBarRight />
-      </div>
-    </el-header>
-    <el-container class="classic-content">
-      <el-aside>
-        <div class="aside-box" :style="{ width: true ? '65px' : '210px' }">
-          <el-scrollbar>
-            <el-menu
-              :router="false"
-              :default-active="activeMenu"
-              :collapse="true"
-              :unique-opened="true"
-              :collapse-transition="false"
-            >
-              <SubMenu :menu-list="menuList.data" />
-            </el-menu>
-          </el-scrollbar>
-        </div>
-      </el-aside>
-      <el-container class="classic-main">
-        <Main />
-      </el-container>
-    </el-container>
-  </el-container> -->
-  <!-- <el-button @click="handleLogout">退出登录</el-button> -->
   <el-container class="layout">
     <el-header>
       <div class="header-lf mask-image">

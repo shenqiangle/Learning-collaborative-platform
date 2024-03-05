@@ -17,3 +17,18 @@ export const AMAP_MAP_KEY: string = "";
 
 // 百度地图 key
 export const BAIDU_MAP_KEY: string = "";
+
+//bing内嵌
+export const BING_URL :string = "https://cn.bing.com/"
+
+ //gitee仓库
+export const GITEE_URL :string = ""
+
+//github仓库
+export const GITHUB_URL :string = ""
+
+//项目文档
+export const PROJECT_DOC_URL :string = ""
+
+//hexo主页
+export const HEXO_URL :string = ""

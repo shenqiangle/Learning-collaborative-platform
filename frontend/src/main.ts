@@ -20,7 +20,6 @@ import ElementPlus from "element-plus";
 
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 
-
 import { createApp } from 'vue'
 
 import { createPinia } from 'pinia'

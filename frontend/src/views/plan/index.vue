@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <label class="container">
-      <input type="checkbox" @change="handleNewPlan($event)"/>
+      <input type="checkbox" @change="handleNewPlan($event)" />
       <span class="checkmark"></span>
       <el-input
         v-model="newPlanInfo.planName"
@@ -31,7 +31,11 @@
             v-for="PlanInfo in unCompletedList"
             :key="PlanInfo.id"
           >
-            <PlanItem :PlanInfo="PlanInfo" @updateCheckbox="updatePlanList" @updatePlanImportant="updatePlanImportant"/>
+            <PlanItem
+              :PlanInfo="PlanInfo"
+              @updateCheckbox="updatePlanList"
+              @updatePlanImportant="updatePlanImportant"
+            />
           </el-col>
         </el-row>
         <div v-else>暂无数据</div>
@@ -49,7 +53,11 @@
             v-for="PlanInfo in completedList"
             :key="PlanInfo.id"
           >
-            <PlanItem :PlanInfo="PlanInfo" @updateCheckbox="updatePlanList" @updatePlanImportant="updatePlanImportant"/>
+            <PlanItem
+              :PlanInfo="PlanInfo"
+              @updateCheckbox="updatePlanList"
+              @updatePlanImportant="updatePlanImportant"
+            />
           </el-col>
         </el-row>
         <div v-else>暂无数据</div>
@@ -94,7 +102,6 @@ watch(
   { immediate: true, deep: true } // 使得 watch 创建时立即执行回调函数
 )
 
-
 function updatePlanList(id: string, checked: boolean) {
   UserStore.userInfo.planList?.forEach((element) => {
     if (element.id == id) {
@@ -108,31 +115,28 @@ function updatePlanList(id: string, checked: boolean) {
     }
   })
 }
-function updatePlanImportant(id:string){
+function updatePlanImportant(id: string) {
   UserStore.userInfo.planList?.forEach((element) => {
-    if(element.id == id){
+    if (element.id == id) {
       element.isImportant = !element.isImportant
     }
   })
 }
 
-function handleNewPlan(event: Event){
-  if(!newPlanInfo.planName){
-    showMessage('请先输入任务信息','warning')
+function handleNewPlan(event: Event) {
+  if (!newPlanInfo.planName) {
+    showMessage('请先输入任务信息', 'warning')
+  } else if (!newPlanInfo.planDay) {
+    showMessage('请先选择日期', 'warning')
+  } else {
+    UserStore.userInfo.planList?.push({ ...newPlanInfo })
+    newPlanInfo.planDay = ''
+    newPlanInfo.planName = ''
   }
-  else if(!newPlanInfo.planDay){
-    showMessage('请先选择日期','warning')
+  if (event.target && 'checked' in event.target) {
+    event.target.checked = false
+    audio.play()
   }
-  else{
-    UserStore.userInfo.planList?.push({ ...newPlanInfo });
-  newPlanInfo.planDay = '';
-  newPlanInfo.planName = '';
-  }
-  if(event.target && 'checked' in event.target){
-    event.target.checked = false;
-    audio.play();
-  }
-  
 }
 </script>
 

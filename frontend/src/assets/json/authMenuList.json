@@ -338,7 +338,7 @@
     {
       "path": "/competition",
       "name": "competition",
-      "redirect": "/competition",
+      "component":"/competition/index",
       "meta": {
         "icon": "Stamp",
         "title": "学习挑战和竞赛",
@@ -534,12 +534,12 @@
           }
         },
         {
-          "path": "/link/juejin",
-          "name": "juejin",
-          "component": "/link/juejin/index",
+          "path": "/link/hexo",
+          "name": "hexo",
+          "component": "/link/hexo/index",
           "meta": {
             "icon": "Menu",
-            "title": "掘金主页",
+            "title": "Hexo主页",
             "isLink": "https://juejin.cn/user/3263814531551816/posts",
             "isHide": false,
             "isFull": false,

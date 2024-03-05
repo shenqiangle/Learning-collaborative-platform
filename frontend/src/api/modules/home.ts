@@ -1,6 +1,7 @@
 
 import service from "@/api";
 import type { TeamShow } from '@/types/team'
+import type { Act } from "@/types/global";
 import type { AxiosResponse } from "axios";
 /**
  * @name 主页模块，获取队伍信息展示
@@ -23,4 +24,11 @@ import type { AxiosResponse } from "axios";
 
   export function requestTeam(userName: String){
     return service.post('/index/requestTeam',userName)
+  }
+
+  export function getActInfo(): Promise<Act[]> {
+    return service.get<Act[]>('/index/getActInfo')
+    .then(
+      (response) => response.data
+      );
   }
