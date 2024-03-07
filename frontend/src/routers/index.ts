@@ -39,7 +39,7 @@ import { initDynamicRouter } from './dynamicRoutes';
 
 //全局前置守卫
 
-let hasGetUserInfo = false;
+let hasGetUserInfo:boolean = false;
 
 router.beforeEach( async(to, from, next)=>{
   
@@ -49,7 +49,6 @@ router.beforeEach( async(to, from, next)=>{
   
   
   const token = getToken();
-
   //显示loading
   NProgress.start();
   
@@ -69,9 +68,10 @@ router.beforeEach( async(to, from, next)=>{
   }
 
   //如果用户登录，自动获取用户信息，并存储在userStore当中
+
   if(token && !hasGetUserInfo){
     hasGetUserInfo = true;
-    await userStore.getUserInfo()
+    userStore.getUserInfo()
   }
 
   //设置页面标题

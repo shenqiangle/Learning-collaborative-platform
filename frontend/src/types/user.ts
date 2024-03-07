@@ -18,8 +18,7 @@ export interface UserInfo {
     planList: Plan[] | null;
     requestTeams: TeamShow[] | null;
     resourceList: Resource[] | null;
-    taskList: TentacledTaskList[] | null;
-    token: string;
+    taskList: TaskList[] | null;
     university: null | string;
     /**
      * 账户名
@@ -37,7 +36,7 @@ export interface TeamShow {
     leader: UserShow;
     memberAddable: boolean;
     members: UserShow[];
-    taskList: PurpleTaskList[] | null;
+    taskList: TaskList[] | null;
     teamAvatar: null | string;
     teamName: string;
     teamResource: Resource[] | null;
@@ -61,16 +60,6 @@ export interface UserShow {
     [property: string]: any;
 }
 
-export interface PurpleTaskList {
-    completeDay: null | string;
-    id: string;
-    isCompleted: boolean;
-    performers: UserShow[] | null;
-    taskDescription: string;
-    taskName: string;
-    teamName: string;
-    [property: string]: any;
-}
 
 /**
  * resource
@@ -133,15 +122,10 @@ export interface Plan {
     [property: string]: any;
 }
 
-export interface TentacledTaskList {
-    completeDay: null | string;
-    id: string;
-    isCompleted: boolean;
-    isImportant: boolean;
-    performers: UserShow[] | null;
-    taskDescription: string;
-    taskName: string;
-    teamName: string;
-    [property: string]: any;
+
+export interface changePasswordForm {
+    oldPassword: string;
+    newPassword: string;
+    confirmNewPassword: string;
 }
 

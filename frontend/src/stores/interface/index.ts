@@ -1,3 +1,4 @@
+import type { Menu } from "@/types/global";
 
 export type LayoutType = "vertical" | "classic" | "transverse" | "columns";
 

@@ -76,9 +76,11 @@ function updateTaskList(id: string, checked: boolean) {
       element.isCompleted = checked
       if(checked){
         audio.play();
+
         showMessage('提交成功','success')
       }
       else{
+
         showMessage('取消成功','warning')
       }
     }

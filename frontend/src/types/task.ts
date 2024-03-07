@@ -15,9 +15,6 @@ export interface Task {
 /**
  * userShow
  */
-/**
- * userShow
- */
 export interface UserShow {
     avatar: null | string;
     email: null | string;

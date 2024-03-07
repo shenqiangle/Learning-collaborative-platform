@@ -10,8 +10,8 @@ export const useUserStore = defineStore({
 
   id: "userStore",
 
-  state: (): { userInfo: UserInfo } => ({
-
+  state: () => ({
+    token: '' as string,
     userInfo: {} as UserInfo,
   }),
 
@@ -23,7 +23,7 @@ export const useUserStore = defineStore({
 
     async getUserInfo(){
       const res = await getUserInfo(); // 使用 await 替代 promise.then，使代码更简洁明了
-      this.setUserInfo(res);
+      this.setUserInfo( res);
     },
 
     logout(){
