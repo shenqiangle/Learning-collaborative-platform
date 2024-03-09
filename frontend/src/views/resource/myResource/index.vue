@@ -21,7 +21,7 @@
 
 <script setup lang="ts" name="myResource">
 import { useUserStore } from '@/stores/modules/user';
-import type { Resource } from '@/types/global.d.ts'
+import type { Resource } from '@/types/resource'
 import { computed, reactive, ref } from 'vue';
 interface TableDataItem {
   teamID: string;

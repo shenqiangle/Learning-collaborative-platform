@@ -27,7 +27,7 @@
 
 <script setup lang="ts" name="competition">
 import { getActInfo } from '@/api/modules/home'
-import type { Act } from '@/types/global'
+import type { Act } from '@/types/act'
 import { ref, type Ref } from 'vue'
 import { getDate } from '@/composables/util'
 let actList: Ref<Act[]> = ref([])

@@ -72,39 +72,4 @@ declare const __APP_INFO__: {
 };
 
 
-/**
- * resource
- */
-export interface Resource {
-  avatar: null | string;
-  email: null | string;
-  fileDesc: null | string;
-  fileType: null | string;
-  gender: null | string;
-  major: null | string;
-  name: string;
-  nickName: string;
-  personalDescription: null | string;
-  phone: null | string;
-  src: string;
-  university: null | string;
-  userName: string;
-  [property: string]: any;
-}
 
-/**
- * act
- */
-export interface Act {
-  actDesc: string;
-  endDate: string;
-  /**
-   * ID 编号
-   */
-  id: string;
-  actTitle: string;
-  img: string;
-  src: string;
-  startDate: string;
-  [property: string]: any;
-}

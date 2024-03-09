@@ -67,7 +67,7 @@
 </template>
 
 <script setup lang="ts" name="Plan">
-import type { Plan } from '@/types/user'
+import type { Plan } from '@/types/plan'
 import { nanoid } from 'nanoid'
 import { ref, watch, reactive } from 'vue'
 import PlanItem from './components/PlanItem.vue'
