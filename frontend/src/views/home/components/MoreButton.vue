@@ -44,7 +44,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { TeamShow, UserShow } from '@/types/team'
+import type { TeamShow } from '@/types/team'
+import type { UserShow } from '@/types/user'
 import { requestTeam } from '@/api/modules/home'
 import { useUserStore } from '@/stores/modules/user';
 import { showMessage } from '@/composables/util'
@@ -61,25 +62,11 @@ const props = defineProps({
 const dialogTableVisible = ref(false);
 
 function handleRequestTeam(){
-  if(UserStore.userInfo.addedTeams){
-    UserStore.userInfo.addedTeams.forEach((i)=>{
-      if(i.id == props.teamInfo?.id){
-        showMessage('您已进入队伍','warning');
-        return;
-      }
-    })
-  }
-  else if(UserStore.userInfo.leadTeams){
-    UserStore.userInfo.leadTeams.forEach((i)=>{
-      if(i.id == props.teamInfo?.id){
-        showMessage('您已进入队伍','warning');
-        return;
-      }
-    })
+  if (checkTeams(UserStore.userInfo.joiningTeams) || checkTeams(UserStore.userInfo.leadTeams)) {
+    return;
   }
   else{
-    // eslint-disable-next-line
-    const id = UserStore.userInfo.userName;
+    const id = props.teamInfo?.id as string;
     requestTeam(id).then(()=>{
       showMessage("申请成功",'success');
     }).catch(()=>{
@@ -99,6 +86,17 @@ function handleCheckTeamInfo() {
 
 function handleShowing(){
   emit('removeTeam',props.teamInfo?.id);
+}
+function checkTeams(teams:any) {
+  if(teams){
+    for(let i of teams){
+      if(i.id == props.teamInfo?.id){
+        showMessage('您已经进入队伍','warning');
+        return true;
+      }
+    }
+  }
+  return false;
 }
 
 

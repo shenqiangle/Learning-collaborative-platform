@@ -7,9 +7,9 @@ import authMenuList from '@/assets/json/authMenuList.json'
  * @name 登录模块
  */
 // 用户登录
-export function loginApi(username:string,password:string){
+export function loginApi(userName:string,password:string){
   return service.post("/auth/login",{
-    username,
+    userName,
     password
   })
 }

@@ -18,7 +18,7 @@
       "@": ["src"],
       "@/*": ["src/*"]
     },
-    "moduleResolution": "node",
+    "moduleResolution": "NodeNext",
     "types": ["node"],
   }
 }

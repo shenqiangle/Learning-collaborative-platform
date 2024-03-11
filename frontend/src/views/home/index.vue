@@ -24,9 +24,7 @@
   let IndexTeamList: Ref<TeamShow[]> = ref([])
 
   getIndexTeamInfo().then(res => {
-    if('IndexTeamList' in res){
-      IndexTeamList.value = res.IndexTeamList as TeamShow[]
-    }
+      IndexTeamList.value = res as TeamShow[]
   })
 
   function removeIndexTeam(id: String): void {

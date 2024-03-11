@@ -10,7 +10,7 @@ export interface TeamInfo {
     leader: UserShow;
     memberAddable: boolean;
     members: UserShow[];
-    requests: null | UserShow;
+    requests: null | UserShow[];
     taskList: Task[] | null;
     teamAvatar: null | string;
     teamName: string;
@@ -35,3 +35,11 @@ export interface TeamShow {
     [property: string]: any;
 }
 
+
+export interface createTeamInfo {
+    description: null | string;
+    memberAddable: boolean;
+    teamAvatar: null | string;
+    teamName: string;
+    theme: string;
+}

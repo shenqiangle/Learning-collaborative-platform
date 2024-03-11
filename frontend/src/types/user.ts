@@ -6,7 +6,7 @@ import type { Plan } from "./plan";
  * user
  */
 export interface UserInfo {
-    addedTeams: TeamShow[] | null;
+    joiningTeams: TeamShow[] | null;
     avatar: null | string;
     email: null | string;
     gender: null | string;
@@ -20,7 +20,7 @@ export interface UserInfo {
     personalDescription: null | string;
     phone: null | string;
     planList: Plan[] | null;
-    requestTeams: TeamShow[] | null;
+    requestTeams: RequestTeam[] | null;
     resourceList: Resource[] | null;
     taskList: Task[] | null;
     university: null | string;
@@ -48,7 +48,20 @@ export interface UserShow {
     [property: string]: any;
 }
 
-
+export interface RequestTeam {
+    description: null | string;
+    id: string;
+    leader: UserShow;
+    memberAddable: boolean;
+    members: UserShow[];
+    accepted: boolean;
+    taskList: Task[] | null;
+    teamAvatar: null | string;
+    teamName: string;
+    teamResource: Resource[] | null;
+    theme: string;
+    [property: string]: any;
+}
 
 
 export interface changePasswordForm {

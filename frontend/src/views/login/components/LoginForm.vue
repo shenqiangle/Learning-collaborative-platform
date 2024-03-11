@@ -39,16 +39,10 @@ import type { Login } from "@/api/interface"
 import { loginApi } from "@/api/modules/login";
 import { HOME_URL } from "@/config";
 import { initDynamicRouter } from "@/routers/dynamicRoutes";
-//import { useUserStore } from "@/stores/modules/user";
 import { useTabsStore } from "@/stores/modules/tabs";
 import { useKeepAliveStore } from "@/stores/modules/keepAlive";
 
-// import md5 from "md5";
-
-
-
 const router = useRouter();
-//const userStore = useUserStore();
 const tabsStore = useTabsStore();
 const keepAliveStore = useKeepAliveStore();
 
@@ -114,6 +108,9 @@ onMounted(() => {
     }
   };
 }); 
+
+
+
 </script>
 
 <style scoped lang="scss">

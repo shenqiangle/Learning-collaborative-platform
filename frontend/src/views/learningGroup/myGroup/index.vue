@@ -61,8 +61,8 @@ let requestTeamList: Ref<TeamShow[]> = ref([])
 if (UserStore.userInfo.leadTeams) {
   leadTeamList.value = UserStore.userInfo.leadTeams
 }
-if (UserStore.userInfo.addedTeams) {
-  joinedTeamList.value = UserStore.userInfo.addedTeams
+if (UserStore.userInfo.joiningTeams) {
+  joinedTeamList.value = UserStore.userInfo.joiningTeams
 }
 if (UserStore.userInfo.requestTeams) {
   requestTeamList.value = UserStore.userInfo.requestTeams
