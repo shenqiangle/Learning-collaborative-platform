@@ -498,7 +498,7 @@
           "meta": {
             "icon": "Menu",
             "title": "Gitee 仓库",
-            "isLink": "https://gitee.com/HalseySpicy/Geeker-Admin",
+            "isLink": "",
             "isHide": false,
             "isFull": false,
             "isAffix": false,
@@ -512,7 +512,7 @@
           "meta": {
             "icon": "Menu",
             "title": "GitHub 仓库",
-            "isLink": "https://github.com/HalseySpicy/Geeker-Admin",
+            "isLink": "https://github.com/shenqiangle/Learning-collaborative-platform",
             "isHide": false,
             "isFull": false,
             "isAffix": false,
@@ -526,7 +526,7 @@
           "meta": {
             "icon": "Menu",
             "title": "项目文档",
-            "isLink": "https://docs.spicyboy.cn",
+            "isLink": "",
             "isHide": false,
             "isFull": false,
             "isAffix": false,
@@ -540,7 +540,7 @@
           "meta": {
             "icon": "Menu",
             "title": "Hexo主页",
-            "isLink": "https://juejin.cn/user/3263814531551816/posts",
+            "isLink": "",
             "isHide": false,
             "isFull": false,
             "isAffix": false,
