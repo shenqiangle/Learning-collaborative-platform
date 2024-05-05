@@ -3,45 +3,45 @@
     <!-- <Header :leadTeams="UserStore.userInfo.leadTeams" @search="handleSearch" /> -->
     <div class="card content-box">
       <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" label-width="140px">
-        <el-form-item label="Team Name" prop="teamName">
+        <el-form-item label="选择小组" prop="teamId">
           <el-select
-            v-model="ruleForm.teamName"
-            placeholder="请选择队伍"
+            v-model="ruleForm.teamId"
+            placeholder="请选择小组"
             class="header-select"
             clearable
           >
             <el-option
               v-for="item in UserStore.userInfo.leadTeams"
               :key="item.id"
-              :value="item.teamName"
+              :label="item.teamName"
+              :value="item.id"
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="Team Members" prop="teamMembers">
+        <el-form-item label="选择组内成员" prop="performers">
           <el-select
-            v-model="ruleForm.teamMembers"
-            multiple
-            collapse-tags
-            collapse-tags-tooltip
+            v-model="ruleForm.performers"
+            class="header-select"
+            clearable
             placeholder="请选择成员"
           >
             <el-option
               v-for="item in leadTeams.members"
               :key="item.userName"
               :label="item.nickName"
-              :value="item.nickName"
+              :value="item.userName"
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="Task name" prop="taskName">
+        <el-form-item label="任务名称" prop="taskName">
           <el-input v-model="ruleForm.taskName" />
         </el-form-item>
-        <el-form-item label="Task description" prop="desc">
-          <el-input v-model="ruleForm.desc" type="textarea" />
+        <el-form-item label="任务描述" prop="taskDescription">
+          <el-input v-model="ruleForm.taskDescription" type="textarea" />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm(ruleFormRef)"> Create </el-button>
-          <el-button @click="resetForm(ruleFormRef)"> Reset </el-button>
+          <el-button type="primary" @click="submitForm(ruleFormRef)"> 确认 </el-button>
+          <el-button @click="resetForm(ruleFormRef)"> 重置 </el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -54,7 +54,8 @@ import { useUserStore } from '@/stores/modules/user'
 import { reactive, ref, watch } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import type { TeamShow } from '@/types/team'
-import { ElMessage } from 'element-plus'
+import { setTask } from '@/api/modules/team'
+import { showMessage } from '@/composables/util'
 
 const UserStore = useUserStore()
 let leadTeams = reactive<TeamShow>({
@@ -73,15 +74,15 @@ let leadTeams = reactive<TeamShow>({
 const ruleFormRef = ref<FormInstance>()
 const ruleForm = reactive({
   taskName: '',
-  teamName: '',
-  desc: '',
-  teamMembers:{}
+  taskDescription: '',
+  performers:'',
+  teamId:'',
 })
 
   watch(ruleForm,()=>{
-    if(ruleForm.teamName){
+    if(ruleForm.teamId){
       UserStore.userInfo.leadTeams?.forEach(element => {
-        if(element.teamName == ruleForm.teamName){
+        if(element.id == ruleForm.teamId){
           leadTeams.members = element.members
           return 
         }
@@ -89,16 +90,23 @@ const ruleForm = reactive({
     }
   },{deep:true})
 const rules = reactive<FormRules>({
-  teamName: [{ required: true, message: 'Please select Team name', trigger: 'blur' }],
+  teamId: [{ required: true, message: 'Please select Team name', trigger: 'blur' }],
+  performers:[{ required: true, message: 'Please select performer', trigger: 'blur' }],
   taskName: [{ required: true, trigger: 'blur' }],
-  desc: [{ required: true, message: 'Please input team description', trigger: 'blur' }]
+  taskDescription: [{ required: true, message: 'Please input team description', trigger: 'blur' }]
 })
 
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate((valid, fields) => {
     if (valid) {
-      ElMessage.success('提交的数据为 : ' + JSON.stringify(ruleForm))
+      setTask(ruleForm).then(()=>{
+        showMessage("设置成功","success");
+      }).catch((error)=>{
+        showMessage(`设置失败\r\n${error}`,'warning')
+      })
+      resetForm(formEl);
+
     } else {
       console.log('error submit!', fields)
     }

@@ -43,3 +43,9 @@ export interface createTeamInfo {
     teamName: string;
     theme: string;
 }
+
+export interface MemberEditInfo {
+    memberUserName: string;
+    teamId: string;
+    accepted: boolean;
+  }

@@ -51,6 +51,6 @@ export class Team {
   @OneToMany(() => Task, (task) => task.team)
   taskList?: Task[];
 
-  @OneToMany(() => Resource, (resource) => resource.teams)
+  @OneToMany(() => Resource, (resource) => resource.team)
   resources: Resource[];
 }

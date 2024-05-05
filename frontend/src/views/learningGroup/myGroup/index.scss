@@ -40,6 +40,11 @@
   border-bottom: 1px solid #e5e9ef;
 }
 
+:deep(.el-collapse-item__header) {
+  font-size: 18px;
+  color: rgb(67, 70, 67);
+}
+
 :deep(.el-progress-bar__outer) {
   height: 24px !important;
   position: absolute;

@@ -9,3 +9,8 @@ export interface Plan {
     planName: string;
     [property: string]: any;
 }
+
+export interface setPlanInfo {
+    planName: string,   
+    planDay: string
+}

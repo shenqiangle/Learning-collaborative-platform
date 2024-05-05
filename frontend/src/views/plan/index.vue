@@ -67,7 +67,7 @@
 </template>
 
 <script setup lang="ts" name="Plan">
-import type { Plan } from '@/types/plan'
+import type { Plan, setPlanInfo } from '@/types/plan'
 import { nanoid } from 'nanoid'
 import { ref, watch, reactive } from 'vue'
 import PlanItem from './components/PlanItem.vue'
@@ -75,10 +75,8 @@ import { useUserStore } from '@/stores/modules/user'
 import 'animate.css'
 import { showMessage } from '@/composables/util'
 import * as audioFile from '@/assets/audio/ping-82822.mp3'
-const newPlanInfo = reactive<Plan>({
-  id: nanoid(),
-  isCompleted: false,
-  isImportant: false,
+import { setPlan } from '@/api/modules/user'
+const newPlanInfo = reactive<setPlanInfo>({
   planDay: '',
   planName: ''
 })
@@ -105,6 +103,13 @@ watch(
 function updatePlanList(id: string, checked: boolean) {
   UserStore.userInfo.planList?.forEach((element) => {
     if (element.id == id) {
+      setPlan({
+          ...element,
+          isCompleted: checked,
+          isImportant: element.isImportant, 
+        }).catch((error)=>{
+          showMessage(`${error}`,'warning');
+        })
       element.isCompleted = checked
       if (checked) {
         audio.play()
@@ -118,7 +123,15 @@ function updatePlanList(id: string, checked: boolean) {
 function updatePlanImportant(id: string) {
   UserStore.userInfo.planList?.forEach((element) => {
     if (element.id == id) {
+      console.log(element);
       element.isImportant = !element.isImportant
+      setPlan({
+          ...element,
+          isImportant: element.isImportant, 
+          id: element.id,
+        }).catch((error)=>{
+          showMessage(`${error}`,'warning');
+        })
     }
   })
 }
@@ -130,11 +143,16 @@ function handleNewPlan(event: Event) {
     showMessage('请先选择日期', 'warning')
   } else {
     UserStore.userInfo.planList?.push({ ...newPlanInfo })
+    setPlan({
+      planDay: newPlanInfo.planDay,
+      planName: newPlanInfo.planName
+    } as setPlanInfo)
     newPlanInfo.planDay = ''
     newPlanInfo.planName = ''
   }
   if (event.target && 'checked' in event.target) {
     event.target.checked = false
+
     audio.play()
   }
 }

@@ -6,10 +6,10 @@
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item @click="handleRequestTeam">
-          <el-icon><UserFilled /></el-icon>申请进入队伍
+          <el-icon><UserFilled /></el-icon>申请进入小组
         </el-dropdown-item>
         <el-dropdown-item @click="handleCheckTeamInfo">
-          <el-icon><UserFilled /></el-icon>查看队伍人员信息
+          <el-icon><UserFilled /></el-icon>查看小组人员信息
         </el-dropdown-item>
         <el-dropdown-item @click="handleShowing">
           <el-icon><Delete /></el-icon>不再展示
@@ -25,13 +25,13 @@
         <div m="4">
           <div class="expand-info">
             <div>
-              <p m="t-0 b-2">major: {{ props.row.major }}</p>
-              <p m="t-0 b-2">gender: {{ props.row.gender }}</p>
-              <p m="t-0 b-2">email: {{ props.row.email }}</p>
-              <p m="t-0 b-2">phone: {{ props.row.phone }}</p>
-              <p m="t-0 b-2">personalDescription: {{ props.row.personalDescription }}</p>
+              <p m="t-0 b-2">&nbsp;&nbsp; &nbsp;  专业: {{ props.row.major }}</p>
+              <p m="t-0 b-2">&nbsp;&nbsp; &nbsp;  性别: {{ props.row.gender }}</p>
+              <p m="t-0 b-2">&nbsp;&nbsp; &nbsp;  邮箱: {{ props.row.email }}</p>
+              <p m="t-0 b-2">&nbsp;&nbsp; &nbsp;  电话: {{ props.row.phone }}</p>
+              <p m="t-0 b-2">&nbsp;&nbsp; &nbsp;  个人简介: {{ props.row.personalDescription }}</p>
             </div>
-            <img :src="props.row.avatar" alt="memberAvatar">
+            <img src="@/assets/images/avatar.gif" alt="memberAvatar">
           </div>
         </div>
       </template>
@@ -80,7 +80,9 @@ const tableData = ref<UserShow[]>([]);
 function handleCheckTeamInfo() {
   dialogTableVisible.value = true;
   props.teamInfo?.members.forEach((i: UserShow)=>{
-    tableData.value.push(i);
+    if (!tableData.value.includes(i)){
+      tableData.value.push(i);
+    }
   })
 }
 
@@ -91,7 +93,7 @@ function checkTeams(teams:any) {
   if(teams){
     for(let i of teams){
       if(i.id == props.teamInfo?.id){
-        showMessage('您已经进入队伍','warning');
+        showMessage('您已经进入小组','warning');
         return true;
       }
     }

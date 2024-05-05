@@ -1,10 +1,13 @@
-import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Team } from './team';
 import { User } from './user';
 
 @Entity()
 export class Resource {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column()
   src: string;
 
   @Column()
@@ -17,10 +20,10 @@ export class Resource {
   fileDesc: string;
 
   // 反向关系，一个 Resource 属于多个 Team
-  @ManyToOne(() => Team, (team) => team.resources)
-  teams: Team[];
+  @ManyToOne(() => Team, (team) => team.resources, { cascade: true })
+  team: Team;
 
   // 反向关系，一个 Resource 属于多个 User
-  @ManyToOne(() => User, (user) => user.resources)
-  users: User[];
+  @ManyToOne(() => User, (user) => user.resources, { cascade: true })
+  user: User;
 }

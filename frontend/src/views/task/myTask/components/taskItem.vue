@@ -3,7 +3,7 @@
     <label class="container" >
       <div class="taskInfo">
         <div :class="{'completed':taskInfo.isCompleted}" ref="taskNameRef">任务名称:{{ taskInfo.taskName }}</div>
-        <div>所属队伍:{{ taskInfo.teamName }}</div>
+        <div>所属队伍:{{ taskInfo.team.teamName }}</div>
       </div>
       <input type="checkbox" :checked="taskInfo.isCompleted" @change="onCheckboxChange($event)"/>
       <span class="checkmark"></span>

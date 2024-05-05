@@ -65,21 +65,30 @@ export class UserService {
           members: true,
           requests: true,
           taskList: true,
+          resources: true,
         },
         joiningTeams: {
           members: true,
           leader: true,
           requests: true,
           taskList: true,
+          resources: true,
         },
         requestTeams: {
           members: true,
           leader: true,
           requests: true,
           taskList: true,
+          resources: true,
         },
-        taskList: true,
+        taskList: {
+          team: true,
+        },
         planList: true,
+        resources: {
+          team: true,
+          user: true,
+        },
       },
     });
     user.requestTeams = user.requestTeams.map((team) => {
@@ -170,6 +179,9 @@ export class UserService {
         },
         taskList: true,
         planList: true,
+        resources: {
+          team: true,
+        },
       },
     });
     // const user = await this.userRepository.findOne({

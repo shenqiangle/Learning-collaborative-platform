@@ -33,4 +33,11 @@ export class UserController {
     console.log(PlanInfo);
     this.userService.setPlan(req.user, PlanInfo);
   }
+
+  // @Get(':filename')
+  // async downloadFile(@Param('filename') filename, @Res() res: FastifyReply) {
+  //   const filePath = path.resolve(__dirname, '..', 'files', filename);
+  //   res.header('Content-Disposition', `attachment; filename=${filename}`);
+  //   createReadStream(filePath).pipe(res.raw); // 注意，Fastify 使用 ".raw" 而不是 ".res"
+  // }
 }

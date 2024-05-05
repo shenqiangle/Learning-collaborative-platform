@@ -1,6 +1,7 @@
 <template>
     <el-col :span="24" :offset="0" class="team-main" v-if="team">
-      <img :src="(team.teamAvatar as string)" alt="teamLogo">
+      <!-- <img :src="(team.teamAvatar as string)" alt="teamLogo"> -->
+      <img src="@/assets/images/duck.jpg">
       <div class="team-main-right">
         <h3>{{ team.teamName }}</h3>
         <h3>队长：{{ team.leader.nickName }}</h3>

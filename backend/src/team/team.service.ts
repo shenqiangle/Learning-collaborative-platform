@@ -10,6 +10,7 @@ import { User } from 'src/entries/user';
 import { MemberEditInfo, Newteam, setTaskInfo } from 'src/type';
 import { UserService } from 'src/user/user.service';
 import { Task } from 'src/entries/task';
+import { Resource } from 'src/entries/resource';
 
 @Injectable()
 export class TeamService {
@@ -18,6 +19,10 @@ export class TeamService {
     private teamRepository: Repository<Team>,
     @InjectRepository(Task)
     private taskRepository: Repository<Task>,
+    @InjectRepository(Resource)
+    private resourceRepository: Repository<Resource>,
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
     private userService: UserService,
   ) {}
 
@@ -27,9 +32,11 @@ export class TeamService {
         id: teamId,
       },
       relations: {
+        leader: true,
         requests: true,
         members: true,
         taskList: true,
+        resources: true,
       },
     });
     return team;
@@ -179,5 +186,41 @@ export class TeamService {
     const day = date.getDate();
     const today = new Date(Date.UTC(year, month, day));
     return today;
+  }
+
+  async uploadResource(
+    file: any,
+    teamId: string,
+    uploader: string,
+    fileName: string,
+    fileDesc: string,
+  ) {
+    const src = file.path; //文件存储位置
+    const name = fileName; //文件名
+    const fileType = file.mimetype; //文件类型
+    const team = await this.getTeam(Number(teamId));
+    let newFile = this.getNewFile(src, name, fileType, fileDesc, team);
+    team.members.forEach(async (member) => {
+      const user = await this.userService.getPureUser(member.userName);
+      newFile = this.getNewFile(src, name, fileType, fileDesc, team);
+      newFile.user = user;
+      this.resourceRepository.insert(newFile);
+    });
+    const elseUser = await this.userService.getPureUser(team.leader.userName);
+    newFile = this.getNewFile(src, name, fileType, fileDesc, team);
+    newFile.user = elseUser;
+    this.resourceRepository.insert(newFile);
+  }
+
+  getNewFile(src, name, fileType, fileDesc, team) {
+    const newFile: Partial<Resource> = {
+      src,
+      name,
+      fileType,
+      fileDesc,
+      team,
+    };
+
+    return newFile;
   }
 }

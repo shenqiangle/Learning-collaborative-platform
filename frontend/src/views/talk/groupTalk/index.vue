@@ -109,5 +109,9 @@
   body {
     font-family: "Quicksand", sans-serif;
   }
+  .vac-emoji-picker {
+    height: 400px !important;
+    right: -40px !important;
+  }
   </style>
   

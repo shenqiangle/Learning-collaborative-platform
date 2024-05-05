@@ -26,25 +26,25 @@
     @submit="onSubmit(ruleFormRef)"
   >
     <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" label-width="140px">
-      <el-form-item label="nickName" prop="nickName">
+      <el-form-item label="昵称" prop="nickName">
         <el-input v-model="ruleForm.nickName" />
       </el-form-item>
-      <el-form-item label="major" prop="major">
+      <el-form-item label="专业" prop="major">
         <el-input v-model="ruleForm.major" />
       </el-form-item>
-      <el-form-item label="gender" prop="gender">
+      <el-form-item label="性别" prop="gender">
         <el-input v-model="ruleForm.gender" />
       </el-form-item>
-      <el-form-item label="university" prop="university">
+      <el-form-item label="大学" prop="university">
         <el-input v-model="ruleForm.university" />
       </el-form-item>
-      <el-form-item label="email" prop="email">
+      <el-form-item label="邮箱" prop="email">
         <el-input v-model="ruleForm.email" />
       </el-form-item>
-      <el-form-item label="phone" prop="phone">
+      <el-form-item label="手机" prop="phone">
         <el-input v-model="ruleForm.phone" type="textarea" />
       </el-form-item>
-      <el-form-item label="Description" prop="personalDescription">
+      <el-form-item label="个人简介" prop="personalDescription">
         <el-input v-model="ruleForm.personalDescription" type="textarea" />
       </el-form-item>
     </el-form>
@@ -62,6 +62,7 @@ import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import type { UserShow } from '@/types/user'
 import { useUserStore } from '@/stores/modules/user'
+import { modifyUser } from '@/api/modules/user'
 
 const ruleFormRef = ref<FormInstance>()
 const { handleLogout } = useLogout()
@@ -94,13 +95,21 @@ const onSubmit = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate((valid, fields) => {
     if (valid) {
+
       infoRef.value?.showLoading()
 
-      infoRef.value?.closeDrawer()
+      modifyUser(ruleForm).then(()=>{
+        infoRef.value?.closeDrawer()
 
-      infoRef.value?.hideLoading()
+        infoRef.value?.hideLoading()
 
-      ElMessage.success('提交的数据为 : ' + JSON.stringify(ruleForm))
+        location.reload();
+        
+      })
+      .catch(()=>{
+        ElMessage.error("保存失败！")
+      })
+
     } else {
       console.log('error submit!', fields)
     }

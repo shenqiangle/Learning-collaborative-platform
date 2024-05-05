@@ -11,6 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { TeamModule } from './team/team.module';
 import { IndexModule } from './index/index.module';
+import { Act } from './entries/act';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -20,7 +21,7 @@ import { IndexModule } from './index/index.module';
       username: 'root',
       password: 'zhs@2001829',
       database: 'mydb',
-      entities: [User, Team, Task, Plan, Resource],
+      entities: [User, Team, Task, Plan, Resource, Act],
       synchronize: true,
     }),
     AuthModule,

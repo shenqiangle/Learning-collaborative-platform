@@ -14,7 +14,7 @@
         <el-dropdown-item @click="handleCheckTeamResource" v-if="authority != 'request'">
           <el-icon><Download /></el-icon>查看队伍资源文件
         </el-dropdown-item>
-        <el-dropdown-item @click="handleDeleteTeam" v-if="authority == 'lead'">
+        <el-dropdown-item @click="teamDeleteDialog = true" v-if="authority == 'lead'">
           <el-icon><Delete /></el-icon>解散队伍
         </el-dropdown-item>
       </el-dropdown-menu>
@@ -46,11 +46,24 @@
 
   <el-dialog
     v-model="teamConfigureDrawer">
-  <span>队伍配置</span>
-  <template #footer>
-    <ElButton>保存</ElButton>
-    <ElButton>取消</ElButton>
-  </template>
+    <el-collapse  accordion>
+      <el-collapse-item :title="teamInfo && teamInfo.members ? `已加入成员   ${teamInfo.members.length}` : '已加入成员  0'">
+        <MemberCard 
+        v-for="member in teamInfo?.members" :key="member.userName" 
+        :member="member"
+        :id="teamInfo?.id"
+        :flag=true>
+      </MemberCard>
+      </el-collapse-item>
+      <el-collapse-item :title="teamInfo && teamInfo.requests ? `申请中   ${teamInfo.requests.length}` : '申请中  0'" >
+        <MemberCard 
+        v-for="member in teamInfo?.requests" :key="member.userName" 
+        :member="member"
+        :id="teamInfo?.id"
+        :flag=false>
+      </MemberCard>
+      </el-collapse-item>
+    </el-collapse>
   </el-dialog>
 
   <el-dialog
@@ -60,9 +73,9 @@
     <span>确定解散队伍吗？</span>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="teamDeleteDialog = false">Cancel</el-button>
-        <el-button type="primary" @click="teamDeleteDialog = false">
-          Confirm
+        <el-button @click="teamDeleteDialog = false">取消</el-button>
+        <el-button type="primary" @click="handleDeleteTeam">
+          确定
         </el-button>
       </div>
     </template>
@@ -73,12 +86,15 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { TeamShow, UserShow } from '@/types/team'
-import { useUserStore } from '@/stores/modules/user';
+import type { TeamInfo } from '@/types/team'
+import type { UserShow } from '@/types/user';
+import { deleteTeam } from '@/api/modules/team';
+import MemberCard from './memberCard.vue';
+import { showMessage } from '@/composables/util';
 
 const props = defineProps({
   teamInfo: {
-    type: Object as () => TeamShow
+    type: Object as () => TeamInfo
   },
   authority: {
     type: String as () => 'added' | 'lead' | 'request',
@@ -107,13 +123,18 @@ function handleCheckTeamInfo() {
 }
 
 function handleDeleteTeam(){
-  teamDeleteDialog.value = true;
+  deleteTeam(props.teamInfo?.id as string).then(()=>{
+    showMessage("操作成功",'success');
+    location.reload();
+    teamDeleteDialog.value = false;
+  }).catch(()=>{
+    showMessage("操作失败",'warning');
+  })
 }
 
 function handleCheckTeamResource(){
   
 }
-
 
 </script>
 

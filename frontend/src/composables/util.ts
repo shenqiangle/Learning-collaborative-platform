@@ -72,9 +72,12 @@ export function getUrlWithParams() {
 export function getDate() {
     const today = new Date();
     const year = today.getFullYear();
-    const month = today.getMonth() + 1; // 注意月份从 0 开始，所以要加 1
-    const day = today.getDate();
+    const m = today.getMonth() + 1; // 注意月份从 0 开始，所以要加 1
+    const month = m < 10 ? '0' + m : '' + m;
+    const d = today.getDate();
+    const day = d < 10 ? '0' + d : '' + d;
 
+    
     
     return {year,month,day};
 }

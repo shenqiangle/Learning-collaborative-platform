@@ -6,13 +6,16 @@
     </div>
     
     <el-table :data="showTableData" border style="width: 100%">
-      <el-table-column prop="teamName" label="teamName" width="180" />
-      <el-table-column prop="resourceData.name" label="fileName" width="180" />
-      <el-table-column prop="resourceData.userName" label="uploader" width="180" />
-      <el-table-column prop="resourceData.fileDesc" label="fileDescription" />
-      <el-table-column prop="resourceData.src" label="src">
+      <el-table-column prop="teamName" label="小组名" width="180" />
+      <el-table-column prop="resourceData.name" label="文件名" width="180" />
+      <el-table-column prop="resourceData.user.nickName" label="上传者" width="180" />
+      <el-table-column prop="resourceData.fileDesc" label="文件描述" />
+      <el-table-column prop="resourceData.src" label="">
         <template v-slot:default="scope">
-          <el-button type="primary" @click="handleDownload(scope.row.src)">下载文件</el-button>
+          <el-button type="primary" 
+          @click="handleDownload(scope.row.resourceData.src,
+                                scope.row.resourceData.fileType)">
+            下载文件</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -31,28 +34,17 @@ interface TableDataItem {
 const UserStore = useUserStore()
 const search = ref('')
 
-const handleDownload = (fileName: string) => {
-  const fileUrl = `http://localhost:3000/${fileName}`
-  window.open(fileUrl)
-}
 
+const handleDownload = (fileName: string,fileType: string) => {
+  const fileUrl = `http://localhost:3000/${fileName}`;
+  window.open(fileUrl);
+}
 const tableData: TableDataItem[] = reactive([]);
-UserStore.userInfo.leadTeams?.forEach((leadTeam)=>{
-  leadTeam.teamResource?.forEach((resource:Resource)=>{
-    tableData.push({
-      teamID: leadTeam.id,
-      teamName: leadTeam.teamName,
-      resourceData: resource
-    })
-  })
-})
-UserStore.userInfo.addedTeams?.forEach((addedTeams)=>{
-  addedTeams.teamResource?.forEach((resource:Resource)=>{
-    tableData.push({
-      teamID: addedTeams.id,
-      teamName: addedTeams.teamName,
-      resourceData: resource
-    })
+UserStore.userInfo.resources?.forEach((resource:any)=>{
+  tableData.push({
+    teamID: resource.team.id,
+    teamName: resource.team.teamName,
+    resourceData: resource,
   })
 })
 

@@ -47,10 +47,11 @@ import { ref, watch } from 'vue'
 import Header from './components/header.vue'
 import TaskItem from './components/taskItem.vue'
 import { useUserStore } from '@/stores/modules/user'
-import type { Task } from '@/types/task'
+import type { SetTaskInfo, Task } from '@/types/task'
 import 'animate.css'
 import { showMessage } from '@/composables/util'
 import * as audioFile from '@/assets/audio/ping-82822.mp3';
+import { setTask } from '@/api/modules/team'
 const UserStore = useUserStore()
 let completedList = ref<Task[]>([])
 let unCompletedList = ref<Task[]>([])
@@ -75,12 +76,28 @@ function updateTaskList(id: string, checked: boolean) {
     if (element.id == id) {
       element.isCompleted = checked
       if(checked){
+        setTask({
+          teamId:element.team.id,
+          taskDescription:element.taskDescription,
+          taskName:element.taskName,
+          taskId: element.id,
+          performers:UserStore.userInfo.userName,
+          isCompleted:element.isCompleted
+        }as SetTaskInfo)
+
         audio.play();
 
         showMessage('提交成功','success')
       }
       else{
-
+        setTask({
+          teamId:element.team.id,
+          taskDescription:element.taskDescription,
+          taskName:element.taskName,
+          taskId: element.id,
+          performers:UserStore.userInfo.userName,
+          isCompleted:element.isCompleted
+        }as SetTaskInfo)
         showMessage('取消成功','warning')
       }
     }

@@ -4,7 +4,7 @@
       <el-col :span="24" :offset="0">
         <div class="team-header">
           <img class="team-header-img" src="@/assets/images/logo.svg" alt="logo"  />
-          <span class="team-header-text" >队伍列表</span>
+          <span class="team-header-text" >小组列表</span>
         </div>
       </el-col>
     </el-row>  

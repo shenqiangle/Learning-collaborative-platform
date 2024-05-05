@@ -56,6 +56,6 @@ export class User {
   @OneToMany(() => Plan, (plan) => plan.user, { cascade: true })
   planList?: Plan[];
 
-  @OneToMany(() => Resource, (resource) => resource.users)
+  @OneToMany(() => Resource, (resource) => resource.user)
   resources: Resource[];
 }

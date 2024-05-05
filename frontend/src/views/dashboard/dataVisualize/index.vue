@@ -79,6 +79,7 @@ import Pie from "./components/pie.vue";
 import { useUserStore } from "@/stores/modules/user";
 import { getDate } from '@/composables/util'
 import CountTo from '@/components/CountTo/index.vue'
+import { da } from "element-plus/es/locale/index.mjs";
 
 
 const date = getDate()
@@ -97,12 +98,12 @@ const taskUnCompletedNumber = computed(() => {
 
 const taskTodayNumber = computed(() => {
   const today = `${date.year}-${date.month}-${date.day}`;
-  return countTasks((task) => task.completeDay === today && task.isCompleted);
+  return countTasks((task) => new Date(task.completeDay).toISOString().split('T')[0] == today && task.isCompleted);
 });
 
 const taskYesterdayNumber = computed(() => {
-  const yesterday = `${date.year}-${date.month}-${(date.day)-1}`;
-  return countTasks((task) => task.completeDay === yesterday && task.isCompleted);
+  const yesterday = `${date.year}-${date.month}-${date.day - 1}`;
+  return countTasks((task) => new Date(task.completeDay).toISOString().split('T')[0] == yesterday && task.isCompleted);
 });
 
 // 辅助函数，用于统计符合条件的任务数量

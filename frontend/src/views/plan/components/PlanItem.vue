@@ -7,7 +7,7 @@
         </div>
         <div>
           <el-icon><Calendar /></el-icon>
-          <span class="taskDate">{{ PlanInfo.planDay }}</span>
+          <span class="taskDate">{{ new Date(PlanInfo.planDay).toISOString().split('T')[0] }}</span>
         </div>
       </div>
       <input
@@ -65,6 +65,7 @@ const taskNameRef = ref()
 
 function onCheckboxChange(event: Event) {
   if (event.target && 'checked' in event.target) {
+    console.log(props.PlanInfo);
     emit('updateCheckbox', props.PlanInfo.id, event.target.checked)
   }
 }

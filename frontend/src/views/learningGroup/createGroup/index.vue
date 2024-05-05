@@ -1,21 +1,21 @@
 <template>
   <div class="card content-box">
     <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" label-width="140px">
-      <el-form-item label="Team name" prop="teamName">
+      <el-form-item label="小组名称" prop="teamName">
         <el-input v-model="ruleForm.teamName" />
       </el-form-item>
-      <el-form-item label="Team theme" prop="theme">
+      <el-form-item label="小组主题" prop="theme">
         <el-input v-model="ruleForm.theme" placeholder="学习" />
       </el-form-item>
-      <el-form-item label="memberAddable" prop="memberAddable">
+      <el-form-item label="是否允许加入" prop="memberAddable">
         <el-switch v-model="ruleForm.memberAddable" />
       </el-form-item>
-      <el-form-item label="Team description" prop="description">
+      <el-form-item label="小组描述" prop="description">
         <el-input v-model="ruleForm.description" type="textarea" />
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm(ruleFormRef)"> Create </el-button>
-        <el-button @click="resetForm(ruleFormRef)"> Reset </el-button>
+        <el-button type="primary" @click="submitForm(ruleFormRef)"> 创建 </el-button>
+        <el-button @click="resetForm(ruleFormRef)"> 重置信息 </el-button>
       </el-form-item>
     </el-form>
   </div>

@@ -13,6 +13,7 @@ export const useUserStore = defineStore({
   state: () => ({
     token: '' as string,
     userInfo: {} as UserInfo,
+
   }),
 
   actions:{

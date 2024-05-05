@@ -6,17 +6,17 @@
     <div class="act-list">
       <ul>
         <li v-for="actInfo in actList" :key="actInfo.id">
-          <a :href="actInfo.src" target="_blank"><img :src="actInfo.img" alt="" /></a>
+          <a :href="actInfo.src" target="_blank"><img src="../../assets/images/tortoise.jpg" alt="" /></a>
           <h2>
             <a :href="actInfo.src" target="_blank">{{ actInfo.actTitle }}</a>
           </h2>
           <div class="event_status">
-            <span :class="{ 'status-ing': actInfo.startDate && today <= actInfo.endDate }">
+            <span :class="{ 'status-ing': today >= actInfo.startDate && today <= actInfo.endDate }">
               {{
                 today >= actInfo.startDate && today <= actInfo.endDate ? '【进行中】' : '【已结束】'
               }}
             </span>
-            {{ actInfo.startDate }} 至 {{ actInfo.endDate }}
+            {{ formatDate(actInfo.startDate) }} 至 {{ formatDate(actInfo.endDate) }}
           </div>
           <div class="act-info" :title="actInfo.actDesc">{{ actInfo.actDesc }}</div>
         </li>
@@ -32,13 +32,32 @@ import { ref, type Ref } from 'vue'
 import { getDate } from '@/composables/util'
 let actList: Ref<Act[]> = ref([])
 getActInfo().then((res) => {
-  if ('actList' in res) {
-    actList.value = res.actList as Act[]
+  console.log(res);
+  actList.value = res;
+  if(actList.value){
+    actList.value.forEach(element => {
+      element.startDate = new Date(Number(element.startDate));
+      element.endDate = new Date(Number(element.endDate));
+    });
   }
+}).catch((error)=>{
+  console.log(error);
 })
-const date = getDate()
-const today = `${date.year}-${date.month}-${date.day}`
-console.log(today)
+// const date = getDate()
+// const today = `${date.year}-${date.month}-${date.day}`
+const today = new Date();
+
+function formatDate(date) {
+    var yyyy = date.getFullYear();
+    var mm = date.getMonth() + 1;
+    var dd = date.getDate();
+
+    if (mm < 10) mm = '0' + mm;
+    if (dd < 10) dd = '0' + dd;
+
+    return yyyy + '-' + mm + '-' + dd;
+}
+
 </script>
 
 <style lang="scss" scoped>
